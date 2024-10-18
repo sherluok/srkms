@@ -1,0 +1,84 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  output          = ".prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  // Programmatically override a data source url when creating your PrismaClient
+  // https://www.prisma.io/docs/orm/reference/prisma-client-reference#programmatically-override-a-datasource-url
+  url      = "file:../../template/.srkms/db.sqlite"
+}
+
+// https://next-auth.js.org/v3/adapters/prisma
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  password String    @default("60da0ee172ba560a83261db92952ab2a695809da80768db6b7e33d1105675afb")
+  name     String
+  posts    Article[]
+}
+
+model Blob {
+  id            String   @id // use MD5 hash of the file name
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  fileName      String // a human readable filename, only for display, not for relations
+  contentType   String // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+  contentLength Int // body size in bytes https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length
+}
+
+model Draft {
+  id                 String   @id @default(cuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  content            String
+  articleId          String?
+  article            Article? @relation(fields: [articleId], references: [id])
+  referredByArticles Draft[]  @relation("references")
+  referringArticles  Draft[]  @relation("references")
+}
+
+model Article {
+  id               String    @id @default(cuid())
+  title            String
+  cover            String?
+  language         String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  content          String
+  contentSlice     String
+  tableofContents  String
+  authorId         Int
+  author           User      @relation(fields: [authorId], references: [id])
+  translatedFromId String?
+  translatedFrom   Article?  @relation("translation", fields: [translatedFromId], references: [id])
+  translations     Article[] @relation("translation")
+  published        Boolean   @default(false)
+  deleted          Boolean   @default(false)
+  posts            Post[]
+  tools            Tool[]
+  drafts           Draft[]
+}
+
+model PostTag {
+  id    String @id @default(cuid())
+  label String
+  posts Post[]
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  tags      PostTag[]
+  articleId String
+  article   Article   @relation(fields: [articleId], references: [id])
+}
+
+model Tool {
+  id        String  @id @default(cuid())
+  platform  String
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id])
+}

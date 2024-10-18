@@ -1,0 +1,26 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.ignore": true,
+    "**/.build": true,
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.env": "properties",
+  },
+  "editor.tabSize": 2,
+  "editor.inlineSuggest.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+  },
+  "npm.packageManager": "pnpm",
+  "typescript.tsc.autoDetect": "off",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.tsdk": "node_modules/typescript/lib",
+}

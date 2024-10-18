@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "VSCode Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+			"args": [
+        // VS Code Command Line Interface
+        // https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions
+        "--disable-extensions",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"${workspaceFolder}/../../template",
+			],
+      "outFiles": [
+				"${workspaceFolder}/.build/**/*.js",
+			],
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**",
+        "**/extensionHostProcess.js", // 如果没有这一行的忽略，DEBUG CONSOLE 将不会显示为源文件。
+      ],
+    },
+  ],
+}

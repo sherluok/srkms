@@ -1,0 +1,149 @@
+body {
+	background-color: hsl(0 0% 8%);
+	color: hsl(0 0% 80%);
+}
+
+article {
+	padding-top: 32px;
+	margin-inline: auto;
+	max-width: 800px;
+}
+
+h1 {
+	font: 800 40px/2 var(--vscode-font-family, sans-serif);
+}
+
+h2 {
+	font: 800 32px/2 var(--vscode-font-family, sans-serif);
+}
+
+h3 {
+	font: 800 24px/2 var(--vscode-font-family, sans-serif);
+}
+
+h4 {
+	font: 800 20px/2 var(--vscode-font-family, sans-serif);
+}
+
+h5 {
+	font: 800 16px/2 var(--vscode-font-family, sans-serif);
+}
+
+code {
+	font: 400 14px/24px var(--vscode-editor-font-family, monospace);
+}
+
+p {
+	font: 400 16px/24px var(--vscode-font-family, sans-serif);
+	margin-block: 24px;
+}
+
+p code {
+	padding-inline: 4px;
+	background: hsl(0 0% 16%);
+	color: hsl(0 0% 88%);
+	border-radius: 4px;
+}
+
+figure {
+	padding: 0;
+	margin-inline: 0;
+	margin-block: 20px;
+}
+
+pre code {
+	background: none;
+	color: hsl(0 0% 84%);
+}
+
+p a,
+p a > code {
+	color: hsl(210 100% 72%);
+	text-decoration: underline;
+	&:hover {
+		color: hsl(210 100% 80%);
+	}
+}
+
+figure[data-rehype-pretty-code-figure] {
+	display: flex;
+	flex-direction: column;
+
+
+	/* title="xxx" */
+	figcaption[data-rehype-pretty-code-title] {
+		font: 400 16px/24px var(--vscode-font-family, sans-serif);
+		background: hsl(0 0% 12%);
+		padding-inline: 20px;
+		padding-block: 4px;
+		width: max-content;
+		border-radius: 4px 4px 0 0;
+	}
+
+	pre {
+		flex: 1;
+		background: hsl(0 0% 12%);
+		padding-block: 16px;
+		margin: 0;
+		overflow: auto;
+		border-radius: 4px;
+		outline: none;
+	}
+
+	figcaption[data-rehype-pretty-code-title] + pre {
+		border-radius: 0 4px 4px 4px;
+	}
+
+	span[data-highlighted-line] {
+		background: hsl(220 4% 16%);
+	}
+
+	mark[data-highlighted-chars] {
+		background: hsl(220 4% 24%);
+		border-radius: 2px;
+	}
+
+	span[data-line] {
+		padding-right: 20px;
+	}
+
+	code:not([data-line-numbers]) span[data-line] {
+		padding-left: 20px;
+	}
+
+	/* showLineNumbers */
+	code[data-line-numbers] {
+		counter-reset: line;
+
+		span[data-line]::before {
+			counter-increment: line;
+			content: counter(line);
+			position: sticky;
+			left: 0;
+
+			display: inline-block;
+			width: 1em;
+			padding-left: 20px;
+			padding-right: 20px;
+			text-align: right;
+
+			color: hsl(0 0% 40%);
+			background: hsl(0 0% 12%);
+		}
+
+		span[data-line][data-highlighted-line]::before {
+			color: hsl(0 0% 60%);
+			background: hsl(220 4% 16%);
+		}
+	}
+
+	code[data-line-numbers-max-digits="2"] > span[data-line]::before {
+		width: 1em;
+	}
+
+	code[data-line-numbers-max-digits="3"] > span[data-line]::before {
+		width: 2em;
+	}
+}
+
+

@@ -1,0 +1,4 @@
+.debug
+.build
+.prisma
+scripts/prod.env

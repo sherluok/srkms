@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.bundler",
+  "include": [
+    "./src/**/*",
+    "./scripts/**/*",
+  ],
+  "files": [
+    "global.d.ts",
+  ],
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "^/*": ["./src/*"],
+      // "@/mdx": ["../mdx/src/index"],
+      // "@/prisma": ["../cloudflare/.prisma/client/index"],
+      // "@/prisma/*": ["../cloudflare/.prisma/client/*"],
+      // "@/api": ["../cloudflare/src/api.ts"],
+    },
+  },
+}
